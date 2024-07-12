@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_12_175839) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_12_184123) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_175839) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "customer_id", null: false
+    t.index ["customer_id"], name: "index_carts_on_customer_id"
   end
 
   create_table "carts_products", force: :cascade do |t|
@@ -58,6 +60,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_175839) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.text "first_name"
+    t.text "last_name"
+    t.text "email"
+    t.text "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.text "name"
     t.text "description"
@@ -69,6 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_12_175839) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  add_foreign_key "carts", "customers"
   add_foreign_key "carts_products", "carts"
   add_foreign_key "carts_products", "products"
   add_foreign_key "products", "categories"
