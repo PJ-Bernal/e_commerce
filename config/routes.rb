@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'products#index'
+
+  get 'products/index'
   get 'categories/index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
