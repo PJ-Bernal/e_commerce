@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_14_140649) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_14_145445) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -69,6 +69,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_140649) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.text "method"
+    t.decimal "amount"
+    t.text "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id", null: false
+    t.index ["customer_id"], name: "index_payments_on_customer_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.text "name"
     t.text "description"
@@ -89,8 +99,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_140649) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "shipments", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.text "address", null: false
+    t.text "city", null: false
+    t.text "zip_code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id", null: false
+    t.integer "province_id", null: false
+    t.index ["customer_id"], name: "index_shipments_on_customer_id"
+    t.index ["province_id"], name: "index_shipments_on_province_id"
+  end
+
   add_foreign_key "carts", "customers"
   add_foreign_key "carts_products", "carts"
   add_foreign_key "carts_products", "products"
+  add_foreign_key "payments", "customers"
   add_foreign_key "products", "categories"
+  add_foreign_key "shipments", "customers"
+  add_foreign_key "shipments", "provinces"
 end

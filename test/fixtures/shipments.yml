@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2024-07-14 09:44:59
+  address: MyText
+  city: MyText
+  zip_code: MyText
+
+two:
+  date: 2024-07-14 09:44:59
+  address: MyText
+  city: MyText
+  zip_code: MyText

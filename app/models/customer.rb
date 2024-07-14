@@ -1,9 +1,14 @@
 class Customer < ApplicationRecord
+
+  has_one :cart, dependent: :destroy
+  has_many :payments, dependent: :destroy
+  has_many :shipments, dependent: :destroy
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  has_one :cart, dependent: :destroy
+  
 
   def self.ransackable_associations(auth_object = nil)
     ["cart"]
