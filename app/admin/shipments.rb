@@ -1,7 +1,19 @@
 ActiveAdmin.register Shipment do
 
-  permit_params :address, :city, :zip_code, :date, :customer_id, :province
+  permit_params :shipment_address, :shipment_city, :shipment_zip_code, :shipment_date, :customer_id, :province_id
 
+  index do
+    selectable_column
+    id_column
+    column :customer_id
+    column :customer
+    column :province_id
+    column :date
+    column :address
+    column :city
+    column :zip_code
+    actions
+  end
 
 
   # See permitted parameters documentation:

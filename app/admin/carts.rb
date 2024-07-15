@@ -7,19 +7,13 @@ ActiveAdmin.register Cart do
     id_column
     column :created_at
     column :updated_at
-    column "Customer first name", sortable: 'customers.first_name' do |cart|
-      cart.customer&.first_name
-    end
-    column "Customer last name", sortable: 'customers.last_name' do |cart|
-      cart.customer&.last_name
-    end
+    column :customer_id
     actions
   end
 
   form do |f|
     f.inputs do
-      f.input :customer_id, as: :select, collection: 
-              Customer.all.collect { |customer| [customer.full_name, customer.id] }, include_blank: false, label: 'Customer'
+      f.input :customer_id
     end
     f.actions
   end
