@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  get 'static_contact_pages/show'
+  get 'static_about_pages/show'
   get 'carts/index'
   root 'products#index'
 
   get 'products/index'
   get 'categories/index'
+
+  get '/about', to: 'static_about_pages#show'
+  get '/contact', to: 'static_contact_pages#show'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
