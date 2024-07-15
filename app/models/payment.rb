@@ -4,7 +4,7 @@ class Payment < ApplicationRecord
   validates :payment_status, presence: true
 
   belongs_to :customer
-  has_many :orders
+  has_many :orders, dependent: :restrict_with_error
 
   def self.ransackable_associations(auth_object = nil)
     ["customer", "orders"]
@@ -14,6 +14,10 @@ class Payment < ApplicationRecord
     ["created_at", "customer_id", "id", "id_value", "payment_amount", "payment_method", "payment_status", "updated_at"]
   end
 
+  
+  def display_name
+    "#{payment_method}"
+  end
 
 
 
