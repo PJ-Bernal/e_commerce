@@ -11,14 +11,11 @@ class Payment < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "customer_id", "id", "id_value", "payment_amount", "payment_method", "payment_status", "updated_at"]
+    ["created_at", "customer_id", "id", "id_value", "payment_amount", "payment_method",
+     "payment_status", "updated_at"]
   end
 
-  
   def display_name
-    "#{payment_method}"
+    payment_method.to_s
   end
-
-
-
 end

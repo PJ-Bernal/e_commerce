@@ -12,7 +12,6 @@ class Category < ApplicationRecord
   end
 
   def display_name
-    "#{category_name}"
+    category_name.to_s
   end
-
 end
