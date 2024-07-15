@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :category
 
-  has_many :carts_products
+  has_many :carts_products,  dependent: :destroy
   has_many :carts, through: :carts_products
 
   validates :product_name, presence: true
@@ -15,6 +15,10 @@ class Product < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["carts", "carts_products", "category"]
+  end
+
+  def display_name
+    "#{product_name}"
   end
 
   

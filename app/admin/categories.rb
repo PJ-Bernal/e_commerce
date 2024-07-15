@@ -13,6 +13,16 @@ ActiveAdmin.register Category do
     actions
   end
 
+  show do
+    attributes_table do
+      row :category_name
+      row :created_at
+      row :updated_at
+    end
+  end
+
+  
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

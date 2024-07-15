@@ -10,4 +10,9 @@ class Category < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "id", "id_value", "category_name", "updated_at"]
   end
+
+  def display_name
+    "#{category_name}"
+  end
+
 end

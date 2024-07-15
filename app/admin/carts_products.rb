@@ -1,6 +1,18 @@
 ActiveAdmin.register CartsProduct do
 
-  permit_params :cart_id, :product_id, :quantity
+  permit_params :cart_id, :product_id, :cart_product_quantity
+
+  index do
+    selectable_column
+    id_column
+    column :cart
+    column :product
+    column :cart_product_quantity
+    column :created_at
+    column :updated_at
+    actions
+  end
+
 
 
   # See permitted parameters documentation:

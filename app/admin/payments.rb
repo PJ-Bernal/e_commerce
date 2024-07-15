@@ -1,21 +1,7 @@
 ActiveAdmin.register Payment do
 
-  permit_params :payment_method, :amount, :status, :customer_id
+  permit_params :payment_method, :payment_amount, :payment_status, :customer_id
 
-  filter :method
-
-
-
-  show do
-    attributes_table do
-      row :customer
-      row :payment_method
-      row :amount
-      row :status
-      row :created_at
-      row :updated_at
-    end
-  end
 
 
   

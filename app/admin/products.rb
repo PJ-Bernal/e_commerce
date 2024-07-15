@@ -2,20 +2,6 @@ ActiveAdmin.register Product do
 
   permit_params :product_name, :product_description, :product_price, :product_stock, :category_id
 
-  index do
-    selectable_column
-    id_column
-    column :product_name
-    column :product_description
-    column :product_price
-    column :product_stock
-    column :created_at
-    column :updated_at
-    column :category do |category|
-      category.category.category_name
-    end
-    actions
-  end
 
   form do |f|
     f.inputs 'Product details' do

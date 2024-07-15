@@ -2,19 +2,18 @@ ActiveAdmin.register Shipment do
 
   permit_params :shipment_address, :shipment_city, :shipment_zip_code, :shipment_date, :customer_id, :province_id
 
-  index do
-    selectable_column
-    id_column
-    column :customer_id
-    column :customer
-    column :province_id
-    column :date
-    column :address
-    column :city
-    column :zip_code
-    actions
+  
+  form do |f|
+    f.inputs 'Product details' do
+      f.input :customer
+      f.input :province
+      f.input :shipment_address
+      f.input :shipment_city
+      f.input :shipment_zip_code
+      f.input :shipment_date
+    end
+    f.actions
   end
-
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
