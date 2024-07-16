@@ -19,8 +19,8 @@
               </button>
               <div id="categoryDropdown" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="categoryButton">
-                  <%= link_to 'Wine', products_path(category: 'wine'), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-                  <%= link_to 'Beer', products_path(category: 'beer'), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= link_to 'Wine', category_products_path(1), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= link_to 'Beer', category_products_path(2), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
                 </div>
               </div>
             </div>
