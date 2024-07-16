@@ -13,9 +13,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body  class="bg-gray-100 text-gray-900">
+  <body class="bg-gray-100 text-gray-900 flex flex-col min-h-screen">
     <%= render 'layouts/header' %>
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8">
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>

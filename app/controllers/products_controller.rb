@@ -7,4 +7,8 @@ class ProductsController < ApplicationController
     @category_id = params[:category_id]
     @products = Product.where(category_id: @category_id).page(params[:page]).per(12)
   end
+
+  def show
+    @product = Product.find(params[:id])
+  end
 end
