@@ -19,8 +19,8 @@
               </button>
               <div id="categoryDropdown" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                 <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="categoryButton">
-                  <%= link_to 'Wine', category_products_path(1), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
-                  <%= link_to 'Beer', category_products_path(2), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= link_to 'Wine', category_products_path(7), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= link_to 'Beer', category_products_path(6), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
                 </div>
               </div>
             </div>
@@ -34,21 +34,3 @@
     </div>
   </div>
 </nav>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById('categoryButton');
-    const dropdown = document.getElementById('categoryDropdown');
-
-    button.addEventListener('click', (event) => {
-      event.stopPropagation();
-      dropdown.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!dropdown.contains(event.target) && !button.contains(event.target)) {
-        dropdown.classList.add('hidden');
-      }
-    });
-  });
-</script>

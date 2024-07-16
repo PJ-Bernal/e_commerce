@@ -1,4 +1,4 @@
-<h1 class="text-3xl font-bold text-center my-8"><%= Category.find(@category_id).name.capitalize %> Products</h1>
+<h1 class="text-3xl font-bold text-center my-8"><%= Category.find(@category_id).category_name.capitalize %> Products</h1>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <% @products.each do |product| %>

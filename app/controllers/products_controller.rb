@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.order("RANDOM()").limit(20)
+    @products = Product.order("RANDOM()").limit(12)
   end
 
   def category
