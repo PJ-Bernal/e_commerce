@@ -77,3 +77,8 @@ gem "sassc-rails", "~> 2.1"
 gem 'rubocop-rails', require: false
 
 gem "httparty", "~> 0.22.0"
+
+gem "nokogiri", "~> 1.16"
+gem "open-uri", "~> 0.4.1"
+
+gem "faker", "~> 3.4"
