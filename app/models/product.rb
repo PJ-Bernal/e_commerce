@@ -23,4 +23,8 @@ class Product < ApplicationRecord
   def display_name
     product_name.to_s
   end
+
+  def discounted_price
+    product_price * 0.9 if product_sale == 1
+  end
 end

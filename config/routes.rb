@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
   get 'products/category/:category_id', to: 'products#category', as: 'category_products'
+  get 'on_sale', to: 'products#on_sale', as: 'on_sale_products'
 
   get 'categories/index'
 

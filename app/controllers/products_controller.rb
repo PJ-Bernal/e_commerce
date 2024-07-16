@@ -11,4 +11,8 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
   end
+
+  def on_sale
+    @products = Product.where(product_sale: 1).page(params[:page]).per(12)
+  end
 end

@@ -1,6 +1,6 @@
 ActiveAdmin.register Product do
 
-  permit_params :product_name, :product_description, :product_price, :product_stock, :category_id, :image
+  permit_params :product_name, :product_description, :product_price, :product_stock, :category_id, :image, :product_sale
 
   filter :product_name
   filter :product_description
@@ -19,6 +19,7 @@ ActiveAdmin.register Product do
     column :product_stock
     column :created_at
     column :updated_at
+    column :product_sale
     column :image_url do |img|
       if img.image.present?
         image_tag url_for(img.image), style: 'max-width: 250px; margin:auto; display:block;'
@@ -38,6 +39,7 @@ ActiveAdmin.register Product do
       f.input :product_price
       f.input :product_stock
       f.input :image, as: :file
+      f.input :product_sale
     end
     f.actions
   end
@@ -49,6 +51,7 @@ ActiveAdmin.register Product do
       row :product_price
       row :product_stock
       row :category
+      row :product_sale
       row :'download the image' do |ad|
         if product.image.attached?
           link_to ad.image.filename, rails_blob_path(ad.image, disposition: 'attachment') if ad.image.attached?
