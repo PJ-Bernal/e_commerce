@@ -3,18 +3,33 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById('categoryButton');
-    const dropdown = document.getElementById('categoryDropdown');
+    const searchButton = document.getElementById('searchButton');
+    const searchForm = document.getElementById('searchForm');
+    const categoryButton = document.getElementById('categoryButton');
+    const categoryDropdown = document.getElementById('categoryDropdown');
   
-    if (button && dropdown) {
-      button.addEventListener('click', (event) => {
+    if (searchButton && searchForm) {
+      searchButton.addEventListener('click', (event) => {
         event.stopPropagation();
-        dropdown.classList.toggle('hidden');
+        searchForm.classList.toggle('hidden');
       });
   
       document.addEventListener('click', (event) => {
-        if (!dropdown.contains(event.target) && !button.contains(event.target)) {
-          dropdown.classList.add('hidden');
+        if (!searchForm.contains(event.target) && !searchButton.contains(event.target)) {
+          searchForm.classList.add('hidden');
+        }
+      });
+    }
+  
+    if (categoryButton && categoryDropdown) {
+      categoryButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        categoryDropdown.classList.toggle('hidden');
+      });
+  
+      document.addEventListener('click', (event) => {
+        if (!categoryDropdown.contains(event.target) && !categoryButton.contains(event.target)) {
+          categoryDropdown.classList.add('hidden');
         }
       });
     }

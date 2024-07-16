@@ -13,7 +13,7 @@
               <button id="categoryButton" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-haspopup="true" aria-expanded="true">
                 Categories
                 <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M10 3a1 1 0 01.832.445l3.25 4.5a1 1 0 01-.832 1.555H6.75a1 1 0 01-.832-1.555l3.25-4.5A1 1 0 0110 3zm0 14a1 1 0 01-.832-.445l-3.25-4.5a1 1 0 01.832-1.555h6.5a1 1 0 01.832 1.555l-3.25 4.5A1 1 0 0110 17z" clip-rule="evenodd" />
+                  <path fill-rule="evenodd" d="M10 3a1 1 0 01.832.445l3.25 4.5a1 1 0 01-.832 1.555H6.75a1 1 0 01-.832-1.555l3.25-4.5A1 1 0 0110 3zm0 14a1 1 0 01-.832-.445l-3.25-4.5a1 1 0 01-.832-1.555h6.5a1 1 0 01.832 1.555l-3.25 4.5A1 1 0 0110 17z" clip-rule="evenodd" />
                 </svg>
               </button>
               <div id="categoryDropdown" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
@@ -23,6 +23,11 @@
                 </div>
               </div>
             </div>
+            <button id="searchButton" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4a8 8 0 110 16 8 8 0 010-16zm16 16l-4.35-4.35" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -33,3 +38,34 @@
     </div>
   </div>
 </nav>
+
+<div id="searchForm" class="hidden bg-white shadow-md p-4 mt-2">
+  <%= form_with url: search_products_path, method: :get, local: true do %>
+    <div class="flex space-x-4">
+      <div class="flex-1">
+        <label for="keyword" class="block text-gray-700">Keyword</label>
+        <%= text_field_tag :keyword, params[:keyword], class: "mt-1 block w-full" %>
+      </div>
+      <div class="flex-1">
+        <label for="category_id" class="block text-gray-700">Category</label>
+        <%= select_tag :category_id, options_for_select(Category.all.collect { |c| [c.category_name, c.id] }, params[:category_id]), include_blank: true, class: "mt-1 block w-full" %>
+      </div>
+      <div class="flex-1">
+        <label for="sale" class="block text-gray-700">On Sale</label>
+        <%= select_tag :sale, options_for_select([['Yes', 1], ['No', 0]], params[:sale]), include_blank: true, class: "mt-1 block w-full" %>
+      </div>
+      <div class="flex-1">
+        <label for="min_price" class="block text-gray-700">Min Price</label>
+        <%= number_field_tag :min_price, params[:min_price], class: "mt-1 block w-full" %>
+      </div>
+      <div class="flex-1">
+        <label for="max_price" class="block text-gray-700">Max Price</label>
+        <%= number_field_tag :max_price, params[:max_price], class: "mt-1 block w-full" %>
+      </div>
+      <div class="flex items-end">
+        <%= submit_tag 'Search', class: "mt-1 block w-full bg-blue-500 text-white py-2 rounded" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

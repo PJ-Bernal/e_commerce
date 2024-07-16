@@ -84,3 +84,5 @@ gem "open-uri", "~> 0.4.1"
 gem "faker", "~> 3.4"
 
 gem "kaminari", "~> 1.2"
+
+gem "turbolinks", "~> 5.2"
