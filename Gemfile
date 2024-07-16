@@ -75,3 +75,5 @@ gem "devise", "~> 4.9"
 gem "sassc-rails", "~> 2.1"
 
 gem 'rubocop-rails', require: false
+
+gem "httparty", "~> 0.22.0"
