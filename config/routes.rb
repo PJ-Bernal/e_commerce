@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'carts/index'
   root 'products#index'
 
-  get 'products/index'
+  get 'products', to: 'products#index'
   get 'categories/index'
 
   get '/about', to: 'static_about_pages#show'

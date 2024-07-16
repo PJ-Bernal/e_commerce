@@ -1,0 +1,54 @@
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <a href="/" class="text-xl font-bold">Your Local Store</a>
+      </div>
+      <div class="flex-1 flex justify-center">
+        <div class="relative">
+          <div class="flex space-x-4">
+            <%= link_to 'On Sale', products_path(filter: 'on_sale'), class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+            <%= link_to 'New Products', products_path(filter: 'new_products'), class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+            <%= link_to 'Recently Updated', products_path(filter: 'recently_updated'), class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+            <div class="relative inline-block text-left">
+              <button id="categoryButton" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-haspopup="true" aria-expanded="true">
+                Categories
+                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 3a1 1 0 01.832.445l3.25 4.5a1 1 0 01-.832 1.555H6.75a1 1 0 01-.832-1.555l3.25-4.5A1 1 0 0110 3zm0 14a1 1 0 01-.832-.445l-3.25-4.5a1 1 0 01.832-1.555h6.5a1 1 0 01.832 1.555l-3.25 4.5A1 1 0 0110 17z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              <div id="categoryDropdown" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="categoryButton">
+                  <%= link_to 'Wine', products_path(category: 'wine'), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                  <%= link_to 'Beer', products_path(category: 'beer'), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <%= link_to 'About', about_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+        <%= link_to 'Contact', contact_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('categoryButton');
+    const dropdown = document.getElementById('categoryDropdown');
+
+    button.addEventListener('click', (event) => {
+      event.stopPropagation();
+      dropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+  });
+</script>
