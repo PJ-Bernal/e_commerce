@@ -1,12 +1,15 @@
 class Customer < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
   has_one :cart, dependent: :restrict_with_error
   has_many :payments, dependent: :restrict_with_error
   has_many :shipments, dependent: :restrict_with_error
   has_many :orders, dependent: :restrict_with_error
 
   validates :customer_full_name, presence: true
-  validates :customer_email, presence: true,
-                             format:   { with: URI::MailTo::EMAIL_REGEXP }
 
   def self.ransackable_associations(auth_object = nil)
     ["cart"]

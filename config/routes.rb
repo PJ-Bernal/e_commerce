@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :customers
   get 'static_contact_pages/show'
   get 'static_about_pages/show'
   get 'carts/index'

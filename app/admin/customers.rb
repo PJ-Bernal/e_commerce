@@ -5,7 +5,8 @@ ActiveAdmin.register Customer do
     selectable_column
     id_column
     column :customer_full_name
-    column :customer_email
+    column :email
+    column :encrypted_password
     column :created_at
     column :updated_at
     actions

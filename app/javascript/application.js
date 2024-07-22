@@ -2,36 +2,42 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+// Import Rails UJS
+import * as Rails from "@rails/ujs"
+
+// Initialize Rails UJS (no need to call start)
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.getElementById('searchButton');
-    const searchForm = document.getElementById('searchForm');
-    const categoryButton = document.getElementById('categoryButton');
-    const categoryDropdown = document.getElementById('categoryDropdown');
-  
-    if (searchButton && searchForm) {
-      searchButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        searchForm.classList.toggle('hidden');
-      });
-  
-      document.addEventListener('click', (event) => {
-        if (!searchForm.contains(event.target) && !searchButton.contains(event.target)) {
-          searchForm.classList.add('hidden');
-        }
-      });
-    }
-  
-    if (categoryButton && categoryDropdown) {
-      categoryButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        categoryDropdown.classList.toggle('hidden');
-      });
-  
-      document.addEventListener('click', (event) => {
-        if (!categoryDropdown.contains(event.target) && !categoryButton.contains(event.target)) {
-          categoryDropdown.classList.add('hidden');
-        }
-      });
-    }
-  });
-  
+  const searchButton = document.getElementById('searchButton');
+  const searchForm = document.getElementById('searchForm');
+  const categoryButton = document.getElementById('categoryButton');
+  const categoryDropdown = document.getElementById('categoryDropdown');
+
+  if (searchButton && searchForm) {
+    searchButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      searchForm.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!searchForm.contains(event.target) && !searchButton.contains(event.target)) {
+        searchForm.classList.add('hidden');
+      }
+    });
+  }
+
+  if (categoryButton && categoryDropdown) {
+    categoryButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      categoryDropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!categoryDropdown.contains(event.target) && !categoryButton.contains(event.target)) {
+        categoryDropdown.classList.add('hidden');
+      }
+    });
+  }
+});
+

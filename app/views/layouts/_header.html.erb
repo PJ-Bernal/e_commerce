@@ -7,8 +7,8 @@
       <div class="flex-1 flex justify-center">
         <div class="relative">
           <div class="flex space-x-4">
-            <%= link_to 'On Sale', on_sale_products_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
-            <%= link_to 'New Products', products_path(filter: 'new_products'), class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+            <%= link_to 'On Sale', on_sale_products_path, class: "text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium" %>
+            <%= link_to 'New Products', products_path(filter: 'new_products'), class: "text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium" %>
             <div class="relative inline-block text-left">
               <button id="categoryButton" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-haspopup="true" aria-expanded="true">
                 Categories
@@ -23,8 +23,8 @@
                 </div>
               </div>
             </div>
-            <button id="searchButton" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button id="searchButton" class="text-gray-700 hover:text-black px-3 py-2 rounded-md text-sm font-medium">
+              <svg class="h-5 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4a8 8 0 110 16 8 8 0 010-16zm16 16l-4.35-4.35" />
               </svg>
             </button>
@@ -34,6 +34,12 @@
       <div>
         <%= link_to 'About', about_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
         <%= link_to 'Contact', contact_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+        <% if customer_signed_in? %>
+          <%= link_to 'Logout', destroy_customer_session_path, method: :delete, data: { method: :delete }, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+        <% else %>
+          <%= link_to 'Sign Up', new_customer_registration_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+          <%= link_to 'Login', new_customer_session_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -68,4 +74,3 @@
     </div>
   <% end %>
 </div>
-
