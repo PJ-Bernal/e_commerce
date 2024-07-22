@@ -15,6 +15,15 @@ Rails.application.routes.draw do
   get '/about', to: 'static_about_pages#show'
   get '/contact', to: 'static_contact_pages#show'
 
+  resources :carts_products, only: [:create, :update, :destroy]
+  get 'update_cart_prices', to: 'carts#update_cart_prices'
+  resource :cart, only: [:show]
+
+  resource :profile, only: [:show] do
+    post 'create_shipment', on: :collection
+    post 'select_shipment', on: :collection
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

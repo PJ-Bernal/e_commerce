@@ -1,0 +1,54 @@
+<h1 class="text-2xl font-bold mb-4">Your Shopping Cart</h1>
+
+<% if @selected_shipment %>
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-xl font-bold mb-4">Selected Shipment Address</h2>
+    <p class="text-gray-700"><strong>Address:</strong> <%= @selected_shipment.shipment_address %></p>
+    <p class="text-gray-700"><strong>City:</strong> <%= @selected_shipment.shipment_city %></p>
+    <p class="text-gray-700"><strong>Zip Code:</strong> <%= @selected_shipment.shipment_zip_code %></p>
+    <p class="text-gray-700"><strong>Province:</strong> <%= @selected_shipment.province.province_name %></p>
+  </div>
+<% end %>
+
+<% if @cart.carts_products.any? %>
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white">
+      <thead>
+        <tr>
+          <th class="py-2">Product</th>
+          <th class="py-2">Unit Cost</th>
+          <th class="py-2">Quantity</th>
+          <th class="py-2">Total Cost</th>
+          <th class="py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% total_order_cost = 0 %>
+        <% @cart.carts_products.each do |cart_product| %>
+          <% total_cost_with_taxes = cart_product.total_price_with_taxes(@selected_shipment) %>
+          <% total_order_cost += total_cost_with_taxes %>
+          <tr>
+            <td class="border px-4 py-2"><%= cart_product.product.product_name %></td>
+            <td class="border px-4 py-2"><%= number_to_currency(cart_product.product.product_price) %></td>
+            <td class="border px-4 py-2">
+              <%= form_with(model: cart_product, url: carts_product_path(cart_product), method: :patch, local: true) do |form| %>
+                <%= form.number_field :cart_product_quantity, value: cart_product.cart_product_quantity, min: 1, class: "form-input w-16" %>
+                <%= form.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded" %>
+              <% end %>
+            </td>
+            <td class="border px-4 py-2" id="total-cost-<%= cart_product.id %>"><%= number_to_currency(total_cost_with_taxes) %></td>
+            <td class="border px-4 py-2">
+              <%= link_to 'Remove', carts_product_path(cart_product), method: :delete, class: "text-red-500 hover:text-red-700" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-4 flex justify-end">
+    <div class="text-xl font-bold">Total Order Cost: <%= number_to_currency(total_order_cost) %></div>
+    <%# <%= link_to 'Checkout', new_order_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4" %> %>
+  </div>
+<% else %>
+  <p class="text-gray-500">Your cart is empty.</p>
+<% end %>

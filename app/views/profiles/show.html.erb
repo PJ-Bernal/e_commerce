@@ -1,0 +1,58 @@
+<h1 class="text-2xl font-bold mb-4">User Profile</h1>
+
+<div class="bg-white shadow-md rounded-lg p-6 mb-6">
+  <p class="text-gray-700"><strong>Full Name:</strong> <%= @customer.customer_full_name %></p>
+  <p class="text-gray-700"><strong>Email:</strong> <%= @customer.email %></p>
+</div>
+
+<div class="bg-white shadow-md rounded-lg p-6 mb-6">
+  <h2 class="text-xl font-bold mb-4">Shipment Addresses</h2>
+  <% if @shipments.any? %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <% @shipments.each do |shipment| %>
+        <% if shipment.shipment_address.present? && shipment.shipment_city.present? && shipment.shipment_zip_code.present? && shipment.province.present? %>
+          <div class="border p-4 rounded-lg shadow-sm">
+            <p><strong>Address:</strong> <%= shipment.shipment_address %></p>
+            <p><strong>City:</strong> <%= shipment.shipment_city %></p>
+            <p><strong>Zip Code:</strong> <%= shipment.shipment_zip_code %></p>
+            <p><strong>Province:</strong> <%= shipment.province.province_name %></p>
+            <%= form_with url: select_shipment_profile_path, method: :post, local: true do |form| %>
+              <%= hidden_field_tag :shipment_id, shipment.id %>
+              <%= form.submit "Select this address", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500">No shipment addresses found.</p>
+  <% end %>
+</div>
+
+<div class="bg-white shadow-md rounded-lg p-6">
+  <h2 class="text-xl font-bold mb-4">Add New Shipment Address</h2>
+  <% if flash[:alert] %>
+    <div class="text-red-500 mb-4"><%= flash[:alert] %></div>
+  <% end %>
+  <%= form_with(model: @new_shipment, url: create_shipment_profile_path, local: true) do |form| %>
+    <div class="mb-4">
+      <%= form.label :shipment_address, class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_area :shipment_address, class: "form-textarea mt-1 block w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :shipment_city, class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_field :shipment_city, class: "form-input mt-1 block w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :shipment_zip_code, class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.text_field :shipment_zip_code, class: "form-input mt-1 block w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :province_id, "Province", class: "block text-gray-700 font-bold mb-2" %>
+      <%= form.collection_select :province_id, Province.all, :id, :province_name, { prompt: "Select a Province" }, class: "form-select mt-1 block w-full" %>
+    </div>
+    <div class="mt-4">
+      <%= form.submit "Add Shipment Information", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+    </div>
+  <% end %>
+</div>

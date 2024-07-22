@@ -11,4 +11,16 @@ class CartsProduct < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["cart", "product"]
   end
+
+  def total_price_with_taxes(shipment = nil)
+    shipment ||= cart.customer.shipments.last
+    province = shipment.province
+    gst = province.province_gst / 100
+    pst = province.province_pst / 100
+    hst = province.province_hst / 100
+
+    base_price = product.product_price * cart_product_quantity
+    total_taxes = base_price * (gst + pst + hst)
+    base_price + total_taxes
+  end
 end

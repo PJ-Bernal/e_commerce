@@ -31,11 +31,18 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="flex items-center space-x-4">
         <%= link_to 'About', about_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
         <%= link_to 'Contact', contact_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
         <% if customer_signed_in? %>
+          <div class="border-l border-gray-300 h-6 mx-2"></div>
+          <%= link_to 'Profile', profile_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
           <%= link_to 'Logout', destroy_customer_session_path, method: :delete, data: { method: :delete }, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
+          <%= link_to cart_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" do %>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h14l1-2h-4.5m-2 0H8l-1 2h9l1 2H7l-1 2H4a1 1 0 01-1-1V4a1 1 0 011-1h1.6l.4 2M7 13h10l1-2H8l-1 2zm-1 0h10l1-2H7l-1 2z" />
+            </svg>
+          <% end %>
         <% else %>
           <%= link_to 'Sign Up', new_customer_registration_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
           <%= link_to 'Login', new_customer_session_path, class: "text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium" %>
@@ -44,33 +51,3 @@
     </div>
   </div>
 </nav>
-
-<div id="searchForm" class="hidden bg-white shadow-md p-4 mt-2">
-  <%= form_with url: search_products_path, method: :get, local: true do %>
-    <div class="flex space-x-4">
-      <div class="flex-1">
-        <label for="keyword" class="block text-gray-700">Keyword</label>
-        <%= text_field_tag :keyword, params[:keyword], class: "mt-1 block w-full" %>
-      </div>
-      <div class="flex-1">
-        <label for="category_id" class="block text-gray-700">Category</label>
-        <%= select_tag :category_id, options_for_select(Category.all.collect { |c| [c.category_name, c.id] }, params[:category_id]), include_blank: true, class: "mt-1 block w-full" %>
-      </div>
-      <div class="flex-1">
-        <label for="sale" class="block text-gray-700">On Sale</label>
-        <%= select_tag :sale, options_for_select([['Yes', 1], ['No', 0]], params[:sale]), include_blank: true, class: "mt-1 block w-full" %>
-      </div>
-      <div class="flex-1">
-        <label for="min_price" class="block text-gray-700">Min Price</label>
-        <%= number_field_tag :min_price, params[:min_price], class: "mt-1 block w-full" %>
-      </div>
-      <div class="flex-1">
-        <label for="max_price" class="block text-gray-700">Max Price</label>
-        <%= number_field_tag :max_price, params[:max_price], class: "mt-1 block w-full" %>
-      </div>
-      <div class="flex items-end">
-        <%= submit_tag 'Search', class: "mt-1 block w-full bg-blue-500 text-white py-2 rounded" %>
-      </div>
-    </div>
-  <% end %>
-</div>

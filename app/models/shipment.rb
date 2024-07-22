@@ -2,7 +2,6 @@ class Shipment < ApplicationRecord
   belongs_to :customer
   belongs_to :province
 
-  validates :shipment_date, presence: true
   validates :shipment_address, presence: true
   validates :shipment_city, presence: true
   validates :shipment_zip_code, presence: true,
