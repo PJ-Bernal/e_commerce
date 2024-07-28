@@ -3,6 +3,7 @@ class Province < ApplicationRecord
   has_many :orders, dependent: :restrict_with_error
 
   validates :province_name, presence: true
+
   validates :province_gst, :province_pst, :province_hst,
             numericality: { greater_than_or_equal_to: 0.0 }
 
