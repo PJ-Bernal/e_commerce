@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :category
 
   has_many :carts_products, dependent: :destroy
+
   has_many :carts, through: :carts_products
 
   validates :product_name, presence: true
